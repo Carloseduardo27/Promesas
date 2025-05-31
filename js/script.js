@@ -2,15 +2,10 @@
 const botonIniciarPedido = document.getElementById('iniciarPedido');
 const mensajes = document.getElementById('mensajes');
 
+//Simula la preparación de un platillo con un retardo.
 
-/**
- * Simula la preparación de un platillo con un retardo.
- * @param {string} platillo - El nombre del platillo a preparar.
- * @returns {Promise<void>} Una promesa que se resuelve cuando el 
- * platillo está listo.
- */
-const simularPreparacion = platillo => {
-    return new Promise(resolve => {
+const simularPreparacion = (platillo) => {
+    return new Promise((resolve) => {
         // Añadir mensaje de inicio de preparación
         mensajes.innerHTML += `<p>Preparando ${platillo}...</p>`;
         // Simular un tiempo de preparación de 2 segundos
@@ -22,7 +17,6 @@ const simularPreparacion = platillo => {
     });
 };
 
-
 // Añadir un "event listener" al botón para iniciar el pedido
 botonIniciarPedido.addEventListener('click', () => {
     // Limpiar mensajes anteriores al iniciar un nuevo pedido
@@ -31,7 +25,6 @@ botonIniciarPedido.addEventListener('click', () => {
     botonIniciarPedido.disabled = true;
     botonIniciarPedido.textContent = 'Procesando pedido...';
 
-
     // Encadenar las promesas para simular la secuencia de preparación
     simularPreparacion('bebida')
         .then(() => simularPreparacion('pizza'))
@@ -39,9 +32,9 @@ botonIniciarPedido.addEventListener('click', () => {
         .then(() => {
             // Mensaje final de orden completa
             mensajes.innerHTML += '<p>¡Orden completa entregada!</p>';
-            console.log('¡Orden completa entregada!')
+            console.log('¡Orden completa entregada!');
         })
-        .catch(error => {
+        .catch((error) => {
             // Manejo de errores si alguna promesa falla
             mensajes.innerHTML += `<p>Ocurrió un error: ${error.message}</p>`;
         })
